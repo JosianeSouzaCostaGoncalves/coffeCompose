@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplicationcoffee.R
 import com.example.myapplicationcoffee.ui.view.ui.theme.MyApplicationCoffeeTheme
+import com.example.myapplicationcoffee.viewModel.CoffeeViewModel
 import kotlinx.coroutines.delay
 
 @SuppressLint("CustomSplashScreen")
@@ -40,17 +41,19 @@ class SplashActivity : ComponentActivity() {
         setContent {
             MyApplicationCoffeeTheme {
                 val navController = rememberNavController()
-                NavigationSlashToLogin(navController = navController)
+                NavigationGraph(navController = navController)
             }
         }
     }
 }
 
 @Composable
-fun SplashScreen(navController: NavHostController = rememberNavController()) {
+fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(key1 = true) {
         delay(3000)
-        navController.navigate("login")
+        navController.navigate("login") {
+            popUpTo("splash") { inclusive = true }
+        }
     }
 
     Column(
@@ -60,7 +63,6 @@ fun SplashScreen(navController: NavHostController = rememberNavController()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Image(
             painter = painterResource(id = R.drawable.coffee),
             contentDescription = "Splash Image",
@@ -77,20 +79,18 @@ fun SplashScreen(navController: NavHostController = rememberNavController()) {
             ),
             textAlign = TextAlign.Center
         )
-
     }
 }
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
-    Login(navController)
-}
-
-@Composable
-fun NavigationSlashToLogin(navController: NavHostController) {
+fun NavigationGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "splash") {
         composable("splash") { SplashScreen(navController) }
         composable("login") { LoginScreen(navController) }
+        composable("coffeeList") {
+            val coffeeViewModel = CoffeeViewModel() // Instancia o ViewModel
+            CoffeeScreen(coffeeViewModel = coffeeViewModel)
+        }
     }
 }
 
@@ -99,6 +99,6 @@ fun NavigationSlashToLogin(navController: NavHostController) {
 fun DefaultPreview() {
     MyApplicationCoffeeTheme {
         val navController = rememberNavController()
-        NavigationSlashToLogin(navController = navController)
+        NavigationGraph(navController = navController)
     }
 }

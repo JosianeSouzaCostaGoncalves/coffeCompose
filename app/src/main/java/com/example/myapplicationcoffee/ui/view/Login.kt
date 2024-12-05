@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,13 +32,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.myapplicationcoffee.R
-
+import com.example.myapplicationcoffee.viewModel.CoffeeViewModel
 
 @Composable
-fun Login(navController: NavHostController) {
-    var nome by remember {
-        mutableStateOf("")
-    }
+fun LoginScreen(navController: NavHostController) {
+    var nome by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -46,7 +45,6 @@ fun Login(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Column(
             modifier = Modifier
                 .size(150.dp)
@@ -56,8 +54,7 @@ fun Login(navController: NavHostController) {
             verticalArrangement = Arrangement.Center
         ) {
             Image(
-                modifier = Modifier
-                    .size(150.dp),
+                modifier = Modifier.size(150.dp),
                 painter = painterResource(id = R.drawable.coffee),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
@@ -69,9 +66,8 @@ fun Login(navController: NavHostController) {
                 .fillMaxWidth()
                 .padding(top = 64.dp, end = 24.dp, start = 24.dp),
             value = nome,
-            onValueChange = { textoDigitado ->
-                nome = textoDigitado
-            }
+            onValueChange = { textoDigitado -> nome = textoDigitado },
+            label = { Text("Nome de usuário") }
         )
 
         OutlinedTextField(
@@ -79,47 +75,43 @@ fun Login(navController: NavHostController) {
                 .fillMaxWidth()
                 .padding(top = 16.dp, end = 24.dp, start = 24.dp),
             value = nome,
-            onValueChange = { textoDigitado ->
-                nome = textoDigitado
-            }
+            onValueChange = { textoDigitado -> nome = textoDigitado },
+            label = { Text("Senha") }
         )
 
         Button(
-            onClick = {navController.navigate("coffeeActivity")},
+            onClick = {
+                navController.navigate("coffeeList")
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(50.dp),
-            colors = ButtonColors(
+            colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White,
-                contentColor = Color.Black,
-                disabledContentColor = Color.Gray,
-                disabledContainerColor = Color.Unspecified
+                contentColor = Color.Black
             )
-
         ) {
-            Text(
-                text = "Sign in",
-            )
+            Text(text = "Sign in")
         }
     }
 }
 
 @Composable
-fun CoffeeScreen() {
-    CoffeeActivity()
-}
-
-@Composable
-fun NavigationLoginToCoffeeActivity() {
+fun NavigationLoginToCoffeeActivity(coffeeViewModel: CoffeeViewModel) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "coffeeActivity") {
-        composable("login") { Login(navController) }
-        composable("coffeeActivity") { CoffeeScreen() }
+    NavHost(navController = navController, startDestination = "login") {
+        composable("login") {
+            LoginScreen(navController)
+        }
+        composable("coffeeList") {
+            CoffeeScreen(coffeeViewModel)
+        }
     }
 }
 
-@Preview()
+@Preview(showBackground = true)
 @Composable
 fun LoginPreview() {
-    NavigationLoginToCoffeeActivity()
+    val coffeeViewModel = CoffeeViewModel()
+    NavigationLoginToCoffeeActivity(coffeeViewModel)
 }

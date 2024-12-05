@@ -24,7 +24,7 @@ class CoffeeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationCoffeeTheme {
-                val coffeeViewModel: CoffeeViewModel = viewModel()
+                val coffeeViewModel = CoffeeViewModel()
                 CoffeeScreen(coffeeViewModel = coffeeViewModel)
             }
         }

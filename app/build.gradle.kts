@@ -57,12 +57,12 @@ dependencies {
     implementation (libs.ui)
     implementation (libs.androidx.material)
     implementation (libs.ui.tooling.preview)
-    implementation (libs.androidx.activity.compose.v161)
     implementation (libs.androidx.navigation.compose)
     implementation (libs.coil.compose)
-
     implementation (libs.kotlinx.coroutines.android)
-    implementation (libs.androidx.lifecycle.runtime.ktx)
+    implementation (libs.kotlinx.coroutines.core)
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation (libs.androidx.lifecycle.livedata.ktx)
     implementation (libs.androidx.runtime.livedata)
 
     implementation(libs.androidx.core.ktx)
