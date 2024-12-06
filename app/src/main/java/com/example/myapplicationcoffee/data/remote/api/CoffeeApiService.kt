@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface CoffeeApiService {
     @GET("coffee/hot")
-    suspend fun getHotCoffees(): List<Coffee>
+    suspend fun getCoffees(): List<Coffee>
 
 }

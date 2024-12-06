@@ -39,9 +39,9 @@ import com.example.myapplicationcoffee.viewModel.CoffeeViewModel
 
 @Composable
 fun CoffeeScreen(coffeeViewModel: CoffeeViewModel) {
-    val hotCoffees = coffeeViewModel.hotCoffees
+    val coffees = coffeeViewModel.coffees
 
-    if (hotCoffees.isEmpty()) {
+    if (coffees.isEmpty()) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -58,7 +58,7 @@ fun CoffeeScreen(coffeeViewModel: CoffeeViewModel) {
         ) {
             item {
                 Text(
-                    text = "Cafés Quentes",
+                    text = "Hora do Café",
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold,
                         fontSize = 24.sp
@@ -67,18 +67,9 @@ fun CoffeeScreen(coffeeViewModel: CoffeeViewModel) {
                 )
             }
 
-            items(hotCoffees) { coffee ->
+            items(coffees) { coffee ->
                 CoffeeItem(coffee)
             }
-        }
-    }
-}
-
-@Composable
-fun CoffeeList(coffees: List<Coffee>) {
-    LazyColumn(modifier = Modifier.fillMaxWidth()) {
-        items(coffees) { coffee ->
-            CoffeeItem(coffee)
         }
     }
 }

@@ -88,7 +88,7 @@ fun NavigationGraph(navController: NavHostController) {
         composable("splash") { SplashScreen(navController) }
         composable("login") { LoginScreen(navController) }
         composable("coffeeList") {
-            val coffeeViewModel = CoffeeViewModel() // Instancia o ViewModel
+            val coffeeViewModel = CoffeeViewModel()
             CoffeeScreen(coffeeViewModel = coffeeViewModel)
         }
     }
