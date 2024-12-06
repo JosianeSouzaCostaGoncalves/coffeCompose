@@ -72,7 +72,7 @@ fun SplashScreen(navController: NavHostController) {
         )
         Spacer(modifier = Modifier.height(32.dp))
         Text(
-            text = "Coffee Time",
+            text = "Hora do Café",
             style = TextStyle(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
