@@ -10,7 +10,7 @@ class CoffeeRepository(private val apiService: CoffeeApiService) {
             apiService.getCoffees().map {
                 Coffee(
                     id = it.id,
-                    name = it.name ?: "Nome não disponível",
+                    title = it.title ?: "Nome não disponível",
                     description = it.description ?: "Descrição não disponível",
                     ingredients = it.ingredients ?: emptyList(),
                     image = it.image ?: "https://via.placeholder.com/150"

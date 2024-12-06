@@ -91,7 +91,7 @@ fun CoffeeItem(coffee: Coffee) {
         ) {
             Image(
                 painter = rememberImagePainter(coffee.image),
-                contentDescription = coffee.name,
+                contentDescription = coffee.title,
                 modifier = Modifier
                     .size(80.dp)
                     .clip(RoundedCornerShape(8.dp))
@@ -105,7 +105,7 @@ fun CoffeeItem(coffee: Coffee) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = coffee.name,
+                    text = coffee.title,
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     ),
