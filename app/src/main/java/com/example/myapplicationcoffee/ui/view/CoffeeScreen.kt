@@ -100,6 +100,7 @@ fun CoffeeItem(coffee: Coffee) {
             )
 
             Spacer(modifier = Modifier.width(16.dp))
+
             Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.weight(1f)
@@ -122,6 +123,25 @@ fun CoffeeItem(coffee: Coffee) {
                     overflow = TextOverflow.Ellipsis,
                     color = Color.Gray
                 )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "Ingredientes:",
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = Color.DarkGray
+                )
+                Column {
+                    coffee.ingredients?.forEach { ingredient ->
+                        Text(
+                            text = "- $ingredient",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = Color.Gray
+                        )
+                    }
+                }
             }
         }
     }
